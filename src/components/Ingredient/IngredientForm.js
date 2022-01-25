@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Card from "../UI/Card";
-import Loading from "../UI/Loading";
 import "./IngredientForm.css";
 const IngredientForm = (props) => {
   const [titleText, setTitleText] = useState("");
