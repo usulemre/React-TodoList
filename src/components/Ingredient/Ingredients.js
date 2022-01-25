@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import IngredientList from "./IngredientList";
 import Search from "./Search";
 import IngredientForm from "./IngredientForm";
@@ -56,6 +56,10 @@ const Ingredients = () => {
       });
   };
 
+  const filterIngredients = useCallback((currentData) => {
+    setIngredients(currentData);
+  }, []);
+
   const deleteHandler = (ıngredientId) => {
     setIngredients((prevState) =>
       prevState.filter((prev) => prev.id !== ıngredientId)
@@ -68,8 +72,8 @@ const Ingredients = () => {
   return (
     <Fragment>
       {error && <ErorModal onCancel={onCancel} />}
-      <IngredientForm onAdd={addHandler} onLoading={loading} />
-      <Search />
+      <IngredientForm onAdd={addHandler} />
+      <Search onIngredient={filterIngredients} loading={loading}/>
       <IngredientList
         ıngredients={ıngredients}
         onDelete={deleteHandler}
